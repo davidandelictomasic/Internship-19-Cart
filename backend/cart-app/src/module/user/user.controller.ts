@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
@@ -15,21 +15,27 @@ export class UserController {
   }
 
   @Get()
+  @ApiOkResponse({description: 'List of all users', type: [CreateUserDto]})
   findAll() {
     return this.userService.findAll();
   }
 
   @Get(':id')
+  @ApiOkResponse({description: 'The user has been successfully retrieved.', type: CreateUserDto})
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }
 
   @Patch(':id')
+  @ApiOkResponse({description: 'The user has been successfully updated.', type: CreateUserDto})
+  @ApiForbiddenResponse({ description: 'Forbidden.' })
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(+id, updateUserDto);
   }
 
   @Delete(':id')
+  @ApiOkResponse({description: 'The user has been successfully deleted.'})
+  @ApiForbiddenResponse({ description: 'Forbidden.' })
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }

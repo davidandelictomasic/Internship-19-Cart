@@ -19,6 +19,7 @@ model User{
   email     String   @unique
   password  String
   name      String?
+  role      Role     @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   favorites Favorite[]
@@ -93,4 +94,8 @@ enum OrderStatus {
   shipped
   delivered
   cancelled
+}
+enum Role{
+  USER
+  ADMIN
 }

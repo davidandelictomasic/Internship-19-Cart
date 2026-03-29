@@ -1,31 +1,51 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsArray, IsBoolean, IsDefined, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateProductDto {
-    @ApiProperty()
-    name: string;
+  @ApiProperty({ example: 'Nike Air Max' })
+  @IsString()
+  @IsDefined()
+  name: string;
 
-    @ApiProperty()
-    price: number;
+  @ApiProperty({ example: 99.99 })
+  @IsNumber()
+  @IsDefined()
+  price: number;
 
-    @ApiProperty()
-    description?: string;
+  @ApiProperty({ required: false, example: 'Comfortable running shoes' })
+  @IsString()
+  @IsOptional()
+  description?: string;
 
-    @ApiProperty()
-    brand?: string;
+  @ApiProperty({ required: false, example: 'Nike' })
+  @IsString()
+  @IsOptional()
+  brand?: string;
 
-    @ApiProperty()
-    category?: string;
+  @ApiProperty({ required: false, example: 1 })
+  @IsNumber()
+  @IsOptional()
+  categoryId?: number;
 
-    @ApiProperty()
-    size?: string;
+  @ApiProperty({ required: false, example: ['S', 'M', 'L', 'XL'] })
+  @IsArray()
+  @IsString({ each: true })
+  @IsOptional()
+  sizes?: string[];
 
-    @ApiProperty()
-    color?: string;
+  @ApiProperty({ required: false, example: ['Red', 'Blue', 'Black'] })
+  @IsArray()
+  @IsString({ each: true })
+  @IsOptional()
+  colors?: string[];
 
-    @ApiProperty()
-    posterUrl?: string;
+  @ApiProperty({ required: false, example: 'https://example.com/image.jpg' })
+  @IsString()
+  @IsOptional()
+  posterUrl?: string;
 
-    @ApiProperty()
-    isAvailable?: boolean;
-
+  @ApiProperty({ required: false, default: true })
+  @IsBoolean()
+  @IsOptional()
+  isAvailable?: boolean;
 }

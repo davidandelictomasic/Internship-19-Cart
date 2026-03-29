@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, UseGuards, Req, ParseIntPipe } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { UserAuthGuard } from '../auth/user-auth.guard';
+import { AdminAuthGuard } from '../auth/admin-auth.guard';
 
 @ApiTags('Orders')
 @Controller('orders')
@@ -10,42 +12,44 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
+  @UseGuards(UserAuthGuard)
+  @ApiBearerAuth()
   @ApiCreatedResponse({ description: 'Order created.', type: CreateOrderDto })
   create(@Req() req, @Body() createOrderDto: CreateOrderDto) {
     return this.ordersService.create(req.user.id, createOrderDto);
   }
 
+  @Get('my')
+  @UseGuards(UserAuthGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({ description: 'Orders of logged-in user.' })
+  findMy(@Req() req) {
+    return this.ordersService.findAllByUser(req.user.id);
+  }
+
   @Get()
+  @UseGuards(AdminAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ description: 'List of all orders.', type: [CreateOrderDto] })
   findAll() {
     return this.ordersService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(AdminAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ description: 'Order details.', type: CreateOrderDto })
   @ApiNotFoundResponse({ description: 'Order not found.' })
-  findOne(@Param('id') id: string) {
-    return this.ordersService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.ordersService.findOne(id);
   }
 
-  @Patch(':id')
-  @ApiOkResponse({ description: 'Order updated.', type: UpdateOrderDto })
-  @ApiNotFoundResponse({ description: 'Order not found.' })
-  update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
-    return this.ordersService.update(+id, updateOrderDto);
-  }
-
-  @Put(':id')
+  @Patch(':id/status')
+  @UseGuards(AdminAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ description: 'Order status updated.', type: UpdateOrderDto })
   @ApiNotFoundResponse({ description: 'Order not found.' })
-  updateStatus(@Param('id') id: string, @Body('status') newOrderStatus: string) {
-    return this.ordersService.update(+id, { status: newOrderStatus } as UpdateOrderDto);
-  }
-
-  @Delete(':id')
-  @ApiOkResponse({ description: 'Order deleted.' })
-  @ApiNotFoundResponse({ description: 'Order not found.' })
-  remove(@Param('id') id: string) {
-    return this.ordersService.remove(+id);
+  updateStatus(@Param('id', ParseIntPipe) id: number, @Body() updateOrderDto: UpdateOrderDto) {
+    return this.ordersService.update(id, updateOrderDto);
   }
 }

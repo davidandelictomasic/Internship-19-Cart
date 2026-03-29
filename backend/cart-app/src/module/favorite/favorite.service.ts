@@ -1,22 +1,37 @@
-import { Injectable } from '@nestjs/common';
-import { CreateFavoriteDto } from './dto/create-favorite.dto';
-
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class FavoriteService {
-  create(createFavoriteDto: CreateFavoriteDto) {
-    return 'This action adds a new favorite';
+  constructor(private prisma: PrismaService) {}
+
+  async add(userId: number, productId: number) {
+    const existing = await this.prisma.favorite.findUnique({
+      where: { userId_productId: { userId, productId } },
+    });
+    if (existing) throw new ConflictException('Product already in favorites');
+
+    return this.prisma.favorite.create({
+      data: { userId, productId },
+      include: { product: true },
+    });
   }
 
-  findAll() {
-    return `This action returns all favorite`;
+  findAllByUser(userId: number) {
+    return this.prisma.favorite.findMany({
+      where: { userId },
+      include: { product: true },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} favorite`;
-  }
-  
-  remove(id: number) {
-    return `This action removes a #${id} favorite`;
+  async remove(userId: number, productId: number) {
+    const favorite = await this.prisma.favorite.findUnique({
+      where: { userId_productId: { userId, productId } },
+    });
+    if (!favorite) throw new NotFoundException('Favorite not found');
+
+    return this.prisma.favorite.delete({
+      where: { id: favorite.id },
+    });
   }
 }

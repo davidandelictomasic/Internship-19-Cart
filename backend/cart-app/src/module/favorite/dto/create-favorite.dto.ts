@@ -1,9 +1,14 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsDefined, IsNumber } from 'class-validator';
 
 export class CreateFavoriteDto {
-    @ApiProperty()
-    userId: number;
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  @IsDefined()
+  userId: number;
 
-    @ApiProperty()
-    productId: number;
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  @IsDefined()
+  productId: number;
 }

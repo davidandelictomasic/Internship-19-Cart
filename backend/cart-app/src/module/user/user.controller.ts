@@ -1,42 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Put, Body, Req } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-@Controller('user')
+@ApiTags('Users')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  @ApiCreatedResponse({ description: 'The user has been successfully created.' })
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  @Get('me')
+  @ApiOkResponse({ description: 'Current user profile.' })
+  getProfile(@Req() req) {
+    return this.userService.findOne(req.user.id);
   }
 
-  @Get()
-  @ApiOkResponse({description: 'List of all users', type: [CreateUserDto]})
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  @Get(':id')
-  @ApiOkResponse({description: 'The user has been successfully retrieved.', type: CreateUserDto})
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
-  @Patch(':id')
-  @ApiOkResponse({description: 'The user has been successfully updated.', type: CreateUserDto})
-  @ApiForbiddenResponse({ description: 'Forbidden.' })
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  @ApiOkResponse({description: 'The user has been successfully deleted.'})
-  @ApiForbiddenResponse({ description: 'Forbidden.' })
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @Put('me')
+  @ApiOkResponse({ description: 'Profile updated.' })
+  updateProfile(@Req() req, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(req.user.id, updateUserDto);
   }
 }

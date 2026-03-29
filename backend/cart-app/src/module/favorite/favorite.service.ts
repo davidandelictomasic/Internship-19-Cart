@@ -15,9 +15,7 @@ export class FavoriteService {
   findOne(id: number) {
     return `This action returns a #${id} favorite`;
   }
-
   
-
   remove(id: number) {
     return `This action removes a #${id} favorite`;
   }

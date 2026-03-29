@@ -1,34 +1,35 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-@Controller('category')
+@ApiTags('Categories')
+@Controller('categories')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
-  @ApiOkResponse({ description: 'The category has been successfully created.', type: CreateCategoryDto })
+  @ApiCreatedResponse({ description: 'Category created.', type: CreateCategoryDto })
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto);
   }
 
   @Get()
-  @ApiOkResponse({description: 'List of all categories', type: [CreateCategoryDto]})
+  @ApiOkResponse({ description: 'List of all categories.', type: [CreateCategoryDto] })
   findAll() {
     return this.categoryService.findAll();
   }
 
   @Get(':id')
-  @ApiOkResponse({description: 'The category has been successfully retrieved.', type: CreateCategoryDto}) 
+  @ApiOkResponse({ description: 'Category details.', type: CreateCategoryDto })
+  @ApiNotFoundResponse({ description: 'Category not found.' })
   findOne(@Param('id') id: string) {
     return this.categoryService.findOne(+id);
   }
 
-  
-
   @Delete(':id')
-  @ApiOkResponse({description: 'The category has been successfully deleted.'})
+  @ApiOkResponse({ description: 'Category deleted.' })
+  @ApiNotFoundResponse({ description: 'Category not found.' })
   remove(@Param('id') id: string) {
     return this.categoryService.remove(+id);
   }

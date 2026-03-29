@@ -1,25 +1,32 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class CategoryService {
   constructor(private prisma: PrismaService) {}
+
   create(createCategoryDto: CreateCategoryDto) {
-    return 'This action adds a new category';
+    return this.prisma.category.create({
+      data: createCategoryDto,
+    });
   }
 
   findAll() {
-    return this.prisma.category.findMany();
+    return this.prisma.category.findMany({ include: { products: true } });
   }
 
-  findOne(id: number) {
-    return this.prisma.category.findUnique({ where: { id } });
-  }  
-
-  remove(id: number) {
-    return this.prisma.category.delete({
+  async findOne(id: number) {
+    const category = await this.prisma.category.findUnique({
       where: { id },
+      include: { products: true },
     });
+    if (!category) throw new NotFoundException('Category not found');
+    return category;
+  }
+
+  async remove(id: number) {
+    await this.findOne(id);
+    return this.prisma.category.delete({ where: { id } });
   }
 }

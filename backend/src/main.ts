@@ -5,10 +5,12 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { AllExceptionsFilter } from './common/filters/http-exception.filter';
+import helmet from 'helmet';
 
 async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
+  app.use(helmet());
   app.enableCors({
     origin: process.env.ALLOWED_ORIGINS?.split(',') || '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],

@@ -12,7 +12,7 @@ function Welcome() {
     const timers = [
       setTimeout(() => setStep(1), 1000),
       setTimeout(() => setStep(2), 2500),
-      setTimeout(() => navigate('/home'), 4000),
+      setTimeout(() => navigate('/login'), 4000),
     ]
     return () => timers.forEach(clearTimeout)
   }, [navigate])

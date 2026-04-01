@@ -1,9 +1,11 @@
 import Navbar from '../components/Navbar'
+import BottomNav from '../components/BottomNav'
 
 function Home() {
   return (
-    <div>
+    <div className="pb-16">
       <Navbar />
+      <BottomNav />
     </div>
   )
 }

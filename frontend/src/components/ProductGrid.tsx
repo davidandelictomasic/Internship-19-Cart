@@ -1,10 +1,10 @@
-import zutePatike from "../assets/products/state=ŽutePatike.png";
-import crniSweater from "../assets/products/state=CrniSweater.png";
-import sivaHoodica from "../assets/products/state=SivaHoodica.png";
-import crnaKosulja from "../assets/products/state=CrnaKošulja.png";
-import spidermanMajica from "../assets/products/state=SpidermanMajica.png";
-import sivaTuta from "../assets/products/state=SivaTuta.png";
-import plavePatike from "../assets/products/state=PlavePatike.png";
+import zutePatike from "../assets/products/onitsukaTigerMexico.png";
+import crniSweater from "../assets/products/zaraSweathshirt.png";
+import sivaHoodica from "../assets/products/pullbearHoodie.png";
+import crnaKosulja from "../assets/products/bershkaBlueShirt.png";
+import spidermanMajica from "../assets/products/bershkaSpiderLongSleeve.png";
+import sivaTuta from "../assets/products/pumaSivaTuta.png";
+import plavePatike from "../assets/products/nikeTenisicePlave.png";
 
 function ProductGrid() {
   return (

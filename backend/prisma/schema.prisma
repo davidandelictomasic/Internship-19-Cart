@@ -37,7 +37,7 @@ model Product{
 
   sizes       String[]
   colors      String[]
-  posterUrl   String?
+  posterUrls  String[]
   isAvailable Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

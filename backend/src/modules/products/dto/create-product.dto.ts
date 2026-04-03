@@ -39,10 +39,11 @@ export class CreateProductDto {
   @IsOptional()
   colors?: string[];
 
-  @ApiProperty({ required: false, example: 'https://example.com/image.jpg' })
-  @IsString()
+  @ApiProperty({ required: false, example: ['/assets/products/image1.png', '/assets/products/image2.png'] })
+  @IsArray()
+  @IsString({ each: true })
   @IsOptional()
-  posterUrl?: string;
+  posterUrls?: string[];
 
   @ApiProperty({ required: false, default: true })
   @IsBoolean()

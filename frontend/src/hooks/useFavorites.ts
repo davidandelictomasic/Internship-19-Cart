@@ -38,5 +38,43 @@ export function useFavorites() {
     fetchFavorites()
   }, [])
 
-  return { favorites, loading, error }
+  const addFavorite = async (productId: number) => {
+    const token = localStorage.getItem('token')
+    try {
+      const res = await fetch(`http://localhost:3000/favorites/${productId}`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || 'Failed to add favorite')
+      setFavorites(prev => [...prev, json.data])
+      return json.data
+    } catch (err: any) {
+      setError(err.message)
+      return null
+    }
+  }
+
+  const removeFavorite = async (productId: number) => {
+    const token = localStorage.getItem('token')
+    try {
+      const res = await fetch(`http://localhost:3000/favorites/${productId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || 'Failed to remove favorite')
+      setFavorites(prev => prev.filter(f => f.productId !== productId))
+      return true
+    } catch (err: any) {
+      setError(err.message)
+      return false
+    }
+  }
+
+  const isFavorite = (productId: number) => {
+    return favorites.some(f => f.productId === productId)
+  }
+
+  return { favorites, loading, error, addFavorite, removeFavorite, isFavorite }
 }

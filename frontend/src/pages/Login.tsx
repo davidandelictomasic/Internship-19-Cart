@@ -2,15 +2,18 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import cartLogo from '../assets/welcome_animation/cart logo.png'
 import brandName from '../assets/welcome_animation/brand name.png'
+import { useAuth } from '../hooks/useAuth'
 
 function Login() {
   const navigate = useNavigate()
+  const { login, loading, error } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    navigate('/home')
+    const result = await login({ email, password })
+    if (result) navigate('/home')
   }
 
   return (
@@ -46,11 +49,14 @@ function Login() {
           />
         </div>
 
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+
         <button
           type="submit"
-          className="w-full bg-black text-white rounded-full py-3 text-sm font-semibold mt-4"
+          disabled={loading}
+          className="w-full bg-black text-white rounded-full py-3 text-sm font-semibold mt-4 disabled:opacity-50"
         >
-          Sign In
+          {loading ? 'Signing in...' : 'Sign In'}
         </button>
       </form>
 

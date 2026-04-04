@@ -4,7 +4,7 @@ import ProductPreview from '../components/ProductPreview'
 import { useFavorites } from '../hooks/useFavorites'
 
 function Favorites() {
-  const { favorites, loading, error } = useFavorites()
+  const { favorites, loading, error, isFavorite, toggleFavorite } = useFavorites()
 
   return (
     <div className="pb-16 bg-white min-h-screen">
@@ -21,7 +21,12 @@ function Favorites() {
 
       <div className="px-4 mt-3 grid grid-cols-2 gap-3">
         {favorites.map(fav => (
-          <ProductPreview key={fav.id} product={fav.product} />
+          <ProductPreview
+            key={fav.id}
+            product={fav.product}
+            isFavorite={isFavorite(fav.productId)}
+            onToggleFavorite={toggleFavorite}
+          />
         ))}
       </div>
 

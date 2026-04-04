@@ -3,12 +3,16 @@ import { useParams, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import BottomNav from '../components/BottomNav'
 import { useProduct } from '../hooks/useProduct'
+import { useFavorites } from '../hooks/useFavorites'
+import heartIcon from '../assets/heart.png'
+import heartOutlined from '../assets/heartOutlined.png'
 
 function ProductDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { product, loading, error } = useProduct(Number(id))
   const [selectedColor, setSelectedColor] = useState(0)
+  const { isFavorite, toggleFavorite } = useFavorites()
 
   if (loading) return <div className="min-h-screen bg-white"><Navbar /><p className="text-center mt-8 text-gray-400">Loading...</p></div>
   if (error || !product) return <div className="min-h-screen bg-white"><Navbar /><p className="text-center mt-8 text-red-400">Product not found</p></div>
@@ -52,9 +56,17 @@ function ProductDetail() {
           ))}
         </div>
 
-        <button className="w-full bg-[#6B4226] text-white rounded-full py-3 text-sm font-semibold uppercase mt-5">
-          Dodaj u košaricu
-        </button>
+        <div className="flex gap-3 mt-5 items-center">
+          <button className="flex-1 bg-[#6B4226] text-white rounded-full py-3 text-sm font-semibold uppercase">
+            Dodaj u košaricu
+          </button>
+          <button
+            onClick={() => toggleFavorite(product.id)}
+            className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center p-2"
+          >
+            <img src={isFavorite(product.id) ? heartOutlined : heartIcon} alt="Favorite" className="w-5 h-5" />
+          </button>
+        </div>
 
         <div className="flex justify-center mt-4">
           <button

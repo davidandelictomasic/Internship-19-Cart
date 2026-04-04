@@ -1,8 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import type { Product } from '../hooks/useProducts'
 import heartIcon from '../assets/heart.png'
+import heartOutlined from '../assets/heartOutlined.png'
 
-function ProductPreview({ product }: { product: Product }) {
+type Props = {
+  product: Product
+  isFavorite?: boolean
+  onToggleFavorite?: (productId: number) => void
+}
+
+function ProductPreview({ product, isFavorite: favorited = false, onToggleFavorite }: Props) {
   const navigate = useNavigate()
 
   return (
@@ -13,8 +20,11 @@ function ProductPreview({ product }: { product: Product }) {
           alt={product.name}
           className="object-contain max-h-[170px] max-w-full"
         />
-        <button className="absolute top-2 right-2">
-          <img src={heartIcon} alt="Favorite" className="w-5 h-5" />
+        <button
+          className="absolute top-2 right-2"
+          onClick={(e) => { e.stopPropagation(); onToggleFavorite?.(product.id) }}
+        >
+          <img src={favorited ? heartOutlined : heartIcon} alt="Favorite" className="w-5 h-5" />
         </button>
       </div>
       <p className="text-sm font-bold mt-2 text-center uppercase">{product.name}</p>

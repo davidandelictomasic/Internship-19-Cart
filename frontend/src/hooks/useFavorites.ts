@@ -76,5 +76,13 @@ export function useFavorites() {
     return favorites.some(f => f.productId === productId)
   }
 
-  return { favorites, loading, error, addFavorite, removeFavorite, isFavorite }
+  const toggleFavorite = (productId: number) => {
+    if (isFavorite(productId)) {
+      removeFavorite(productId)
+    } else {
+      addFavorite(productId)
+    }
+  }
+
+  return { favorites, loading, error, addFavorite, removeFavorite, isFavorite, toggleFavorite }
 }

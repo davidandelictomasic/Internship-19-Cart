@@ -13,14 +13,14 @@ export class FavoriteService {
 
     return this.prisma.favorite.create({
       data: { userId, productId },
-      include: { product: true },
+      include: { product: { include: { category: true } } },
     });
   }
 
   findAllByUser(userId: number) {
     return this.prisma.favorite.findMany({
       where: { userId },
-      include: { product: true },
+      include: { product: { include: { category: true } } },
     });
   }
 

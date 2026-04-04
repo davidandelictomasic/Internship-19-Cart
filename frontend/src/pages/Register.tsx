@@ -2,17 +2,20 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import cartLogo from '../assets/welcome_animation/cart logo.png'
 import brandName from '../assets/welcome_animation/brand name.png'
+import { useAuth } from '../hooks/useAuth'
 
 function Register() {
   const navigate = useNavigate()
+  const { register, loading, error } = useAuth()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [address, setAddress] = useState('')
 
-  const handleSubmit = (e :React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    navigate('/home')
+    const result = await register({ email, password, name, address })
+    if (result) navigate('/home')
   }
 
   return (
@@ -70,11 +73,14 @@ function Register() {
           />
         </div>
 
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+
         <button
           type="submit"
-          className="w-full bg-black text-white rounded-full py-3 text-sm font-semibold mt-4"
+          disabled={loading}
+          className="w-full bg-black text-white rounded-full py-3 text-sm font-semibold mt-4 disabled:opacity-50"
         >
-          Sign Up
+          {loading ? 'Signing up...' : 'Sign Up'}
         </button>
       </form>
 

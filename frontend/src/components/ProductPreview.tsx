@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom'
 import type { Product } from '../hooks/useProducts'
 import heartIcon from '../assets/heart.png'
 
 function ProductPreview({ product }: { product: Product }) {
+  const navigate = useNavigate()
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col cursor-pointer" onClick={() => navigate(`/product/${product.id}`)}>
       <div className="relative bg-gray-50 rounded-lg p-3 flex items-center justify-center h-[200px]">
         <img
           src={product.posterUrls[0]}

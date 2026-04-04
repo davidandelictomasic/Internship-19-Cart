@@ -5,6 +5,7 @@ import Register from './pages/Register'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Search from './pages/Search'
+import ProductDetail from './pages/ProductDetail'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/search" element={<Search />} />
+      <Route path="/product/:id" element={<ProductDetail />} />
     </Routes>
   )
 }

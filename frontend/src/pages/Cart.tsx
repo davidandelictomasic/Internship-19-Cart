@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
 import CartItemComponent from '../components/CartItem'
+import DeliveryDateInfo from '../components/DeliveryDateInfo'
 import { useCart } from '../hooks/useCart'
 
 function Cart() {
@@ -15,6 +16,14 @@ function Cart() {
         <p className="text-center text-gray-400 mt-16 flex-1">Košarica je prazna.</p>
       ) : (
         <>
+          <div className="px-4 text-xs text-gray-400 text-center mb-3">
+            PROIZVODI NISU REZERVIRANI
+          </div>
+
+          <div className="px-4 mb-4">
+            <DeliveryDateInfo />
+          </div>
+
           <div className="px-4 flex flex-col gap-3 flex-1">
             {items.map((item, index) => (
               <CartItemComponent
@@ -31,7 +40,7 @@ function Cart() {
               <p className="text-xl font-bold">{totalPrice.toFixed(2)} $</p>
             </div>
             <button
-              onClick={() => navigate('/checkout')}
+              onClick={() => navigate('/delivery')}
               className="w-full py-3 rounded-full text-white text-sm font-semibold"
               style={{ backgroundColor: 'rgba(90, 62, 54, 1)' }}
             >

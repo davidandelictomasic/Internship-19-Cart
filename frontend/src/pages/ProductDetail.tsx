@@ -16,6 +16,7 @@ function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState('')
   const { isFavorite, toggleFavorite } = useFavorites()
   const { addItem } = useCart()
+  const [added, setAdded] = useState(false)
 
   if (loading) return <div className="min-h-screen bg-white"><Navbar /><p className="text-center mt-8 text-gray-400">Loading...</p></div>
   if (error || !product) return <div className="min-h-screen bg-white"><Navbar /><p className="text-center mt-8 text-red-400">Product not found</p></div>
@@ -32,7 +33,8 @@ function ProductDetail() {
       selectedSize,
       selectedColor: product.colors[selectedColor] || '',
     })
-    navigate('/cart')
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
   }
 
   return (
@@ -87,7 +89,7 @@ function ProductDetail() {
               selectedSize ? 'bg-[#6B4226] text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
-            Dodaj u košaricu
+            {added ? 'Dodano!' : 'Dodaj u košaricu'}
           </button>
           <button
             onClick={() => toggleFavorite(product.id)}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useAdminProducts } from '../../hooks/useAdminProducts'
-import { useCategories } from '../../hooks/useCategories'
+import { useAdminProducts } from '../../hooks/admin/useAdminProducts'
+import { useCategories } from '../../hooks/products/useCategories'
 
 function AdminProducts() {
   const { products, createProduct, updateProduct, deleteProduct } = useAdminProducts()

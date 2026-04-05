@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import BottomNav from '../components/BottomNav'
-import { useUser } from '../hooks/useUser'
-import { useUpdateUser } from '../hooks/useUpdateUser'
+import { useUser } from '../hooks/user/useUser'
+import { useUpdateUser } from '../hooks/user/useUpdateUser'
 import truckIcon from '../assets/truck.png'
 
 function DeliveryInfo() {

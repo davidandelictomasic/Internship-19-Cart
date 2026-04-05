@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import type { Product } from '../hooks/useProducts'
+import type { Product } from '../hooks/products/useProducts'
 import heartIcon from '../assets/heart.png'
 import heartOutlined from '../assets/heartOutlined.png'
 

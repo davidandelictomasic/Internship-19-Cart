@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import cartLogo from '../assets/welcome_animation/cart logo.png'
 import brandName from '../assets/welcome_animation/brand name.png'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../hooks/user/useAuth'
 
 function Login() {
   const navigate = useNavigate()

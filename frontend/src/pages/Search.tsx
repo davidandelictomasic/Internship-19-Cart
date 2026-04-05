@@ -3,8 +3,8 @@ import Navbar from '../components/Navbar'
 import BottomNav from '../components/BottomNav'
 import ProductPreview from '../components/ProductPreview'
 import CategoryFilter from '../components/CategoryFilter'
-import { useProducts } from '../hooks/useProducts'
-import { useFavorites } from '../hooks/useFavorites'
+import { useProducts } from '../hooks/products/useProducts'
+import { useFavorites } from '../hooks/products/useFavorites'
 import searchIcon from '../assets/search/Vector.png'
 
 function Search() {

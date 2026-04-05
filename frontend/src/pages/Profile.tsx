@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar'
 import BottomNav from '../components/BottomNav'
 import userIcon from '../assets/profile/user.png'
 import visaIcon from '../assets/profile/visa.png'
-import { useUser } from '../hooks/useUser'
+import { useUser } from '../hooks/user/useUser'
 
 function Profile() {
   const { user, loading, error } = useUser()

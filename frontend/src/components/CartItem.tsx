@@ -1,4 +1,4 @@
-import type { CartItem as CartItemType } from '../hooks/useCart'
+import type { CartItem as CartItemType } from '../hooks/products/useCart'
 
 type Props = {
   item: CartItemType

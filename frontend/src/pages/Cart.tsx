@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
 import CartItemComponent from '../components/CartItem'
 import DeliveryDateInfo from '../components/DeliveryDateInfo'
-import { useCart } from '../hooks/useCart'
+import { useCart } from '../hooks/products/useCart'
 
 function Cart() {
   const navigate = useNavigate()

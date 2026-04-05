@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar'
 import BottomNav from '../components/BottomNav'
 import ProductPreview from '../components/ProductPreview'
-import { useFavorites } from '../hooks/useFavorites'
+import { useFavorites } from '../hooks/products/useFavorites'
 
 function Favorites() {
   const { favorites, loading, error, isFavorite, toggleFavorite } = useFavorites()

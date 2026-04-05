@@ -5,8 +5,8 @@ import BottomNav from '../components/BottomNav'
 import { useProduct } from '../hooks/products/useProduct'
 import { useFavorites } from '../hooks/products/useFavorites'
 import { useCart } from '../hooks/products/useCart'
-import heartIcon from '../assets/heart.png'
-import heartOutlined from '../assets/heartOutlined.png'
+import heartIcon from '../assets/heart-outline.png'
+import heartOutlined from '../assets/heart-filled.png'
 
 function ProductDetail() {
   const { id } = useParams()

@@ -1,4 +1,4 @@
-import errorIcon from '../assets/error-warning.png'
+import errorIcon from '../assets/order-response/error-warning.png'
 
 function OrderError({ onClose }: { onClose: () => void }) {
   return (

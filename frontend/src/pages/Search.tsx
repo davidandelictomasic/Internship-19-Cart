@@ -1,29 +1,36 @@
 import { useState, useRef, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import BottomNav from '../components/BottomNav'
 import ProductPreview from '../components/ProductPreview'
 import CategoryFilter from '../components/CategoryFilter'
+import FilterModal from '../components/FilterModal'
 import { useProducts } from '../hooks/products/useProducts'
 import { useFavorites } from '../hooks/products/useFavorites'
-import searchIcon from '../assets/search/Vector.png'
+import searchIcon from '../assets/search/search-icon.png'
+import filterIcon from '../assets/search/filter-icon.png'
 
 function Search() {
   const { products, loading, error } = useProducts()
   const { isFavorite, toggleFavorite } = useFavorites()
-  const [selectedCategory, setSelectedCategory] = useState('')
+  const [searchParams] = useSearchParams()
+  const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || '')
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedColor, setSelectedColor] = useState('')
+  const [showFilter, setShowFilter] = useState(false)
   const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     searchRef.current?.focus()
   }, [])
 
-  const hasInteracted = searchQuery.length > 0 || selectedCategory !== ''
+  const hasInteracted = searchQuery.length > 0 || selectedCategory !== '' || selectedColor !== ''
 
   const filtered = products.filter(p => {
     const matchesCategory = selectedCategory === '' || selectedCategory === 'Sve' || p.category?.name === selectedCategory
     const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesCategory && matchesSearch
+    const matchesColor = selectedColor === '' || p.colors.includes(selectedColor)
+    return matchesCategory && matchesSearch && matchesColor
   })
 
   return (
@@ -66,6 +73,22 @@ function Search() {
             <p className="col-span-2 text-center mt-8 text-gray-400">Nema rezultata.</p>
           )}
         </div>
+      )}
+
+      <button
+        onClick={() => setShowFilter(true)}
+        className="fixed bottom-20 right-4 bg-white rounded-full shadow-lg px-4 py-2 flex items-center gap-2 border border-gray-200 z-40"
+      >
+        <img src={filterIcon} alt="Filter" className="w-4 h-4" />
+        <span className="text-sm">Filter</span>
+      </button>
+
+      {showFilter && (
+        <FilterModal
+          selectedColor={selectedColor}
+          onSelectColor={(c) => { setSelectedColor(c); setShowFilter(false) }}
+          onClose={() => setShowFilter(false)}
+        />
       )}
 
       <BottomNav />

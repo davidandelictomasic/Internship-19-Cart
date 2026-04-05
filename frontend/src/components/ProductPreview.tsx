@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import type { Product } from '../hooks/products/useProducts'
-import heartIcon from '../assets/heart.png'
-import heartOutlined from '../assets/heartOutlined.png'
+import heartIcon from '../assets/heart-outline.png'
+import heartOutlined from '../assets/heart-filled.png'
 
 type Props = {
   product: Product

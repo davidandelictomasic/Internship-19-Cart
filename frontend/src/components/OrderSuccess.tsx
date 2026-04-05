@@ -1,4 +1,4 @@
-import successIcon from '../assets/success-smile.png'
+import successIcon from '../assets/order-response/success-smile.png'
 
 function OrderSuccess({ onClose }: { onClose: () => void }) {
   return (

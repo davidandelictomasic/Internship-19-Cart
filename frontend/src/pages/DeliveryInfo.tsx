@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Navbar from '../components/Navbar'
 import BottomNav from '../components/BottomNav'
 import { useUser } from '../hooks/user/useUser'
 import { useUpdateUser } from '../hooks/user/useUpdateUser'
-import truckIcon from '../assets/truck.png'
+import truckIcon from '../assets/delivery/truck.png'
 
 function DeliveryInfo() {
   const navigate = useNavigate()

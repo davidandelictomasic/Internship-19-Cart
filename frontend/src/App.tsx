@@ -10,8 +10,10 @@ import Favorites from './pages/Favorites'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import DeliveryInfo from './pages/DeliveryInfo'
+import AdminDashboard from './pages/admin/AdminDashboard'
 import PrivateRoute from './components/PrivateRoute'
 import CartRoute from './components/CartRoute'
+import AdminRoute from './components/AdminRoute'
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
       <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
       <Route path="/delivery" element={<CartRoute><DeliveryInfo /></CartRoute>} />
       <Route path="/checkout" element={<CartRoute><Checkout /></CartRoute>} />
+      <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
     </Routes>
   )
 }

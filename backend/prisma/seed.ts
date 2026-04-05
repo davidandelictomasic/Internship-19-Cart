@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import * as bcrypt from "bcrypt";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
@@ -11,6 +12,29 @@ async function main() {
   await prisma.order.deleteMany();
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
+  await prisma.user.deleteMany();
+
+  const hashedPassword = await bcrypt.hash("Test1234!", 10);
+
+  await prisma.user.create({
+    data: {
+      email: "admin@cart.com",
+      password: hashedPassword,
+      name: "Admin",
+      address: "Admin HQ, Zagreb",
+      role: "ADMIN",
+    },
+  });
+
+  await prisma.user.create({
+    data: {
+      email: "user@cart.com",
+      password: hashedPassword,
+      name: "Test User",
+      address: "Ul. Ruđera Boškovića 32, Split",
+      role: "USER",
+    },
+  });
 
   const streetwear = await prisma.category.create({ data: { name: "Streetwear" } });
   const formal = await prisma.category.create({ data: { name: "Formal" } });
@@ -186,7 +210,7 @@ async function main() {
     await prisma.product.create({ data: product });
   }
 
-  console.log("Seed completed: 4 categories, 18 products");
+  console.log("Seed completed: 2 users, 4 categories, 18 products");
 }
 
 main()

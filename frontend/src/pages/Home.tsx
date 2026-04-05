@@ -1,7 +1,7 @@
-import Navbar from '../components/Navbar'
-import BottomNav from '../components/BottomNav'
-import SearchBar from '../components/SearchBar'
-import ProductGrid from '../components/ProductGrid'
+import Navbar from '../components/layout/Navbar'
+import BottomNav from '../components/layout/BottomNav'
+import SearchBar from '../components/search/SearchBar'
+import ProductGrid from '../components/product/ProductGrid'
 
 function Home() {
   return (

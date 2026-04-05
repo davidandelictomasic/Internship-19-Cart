@@ -9,7 +9,7 @@ Full stack e-commerce application built with NestJS and React.
 
 ## How to Run
 
-### Docker (recommended)
+### Docker
 
 ```bash
 cd backend

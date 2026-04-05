@@ -1,6 +1,6 @@
-import cartLogo from '../assets/welcome_animation/cart logo.png'
-import brandName from '../assets/welcome_animation/brand name.png'
-import notificationDefault from '../assets/notification/default.png'
+import cartLogo from '../../assets/welcome_animation/cart logo.png'
+import brandName from '../../assets/welcome_animation/brand name.png'
+import notificationDefault from '../../assets/notification/default.png'
 
 function Navbar() {
   return (

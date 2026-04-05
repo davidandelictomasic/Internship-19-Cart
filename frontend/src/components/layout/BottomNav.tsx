@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import homeIcon from '../assets/bottom-navbar/home.png'
-import searchIcon from '../assets/bottom-navbar/search.png'
-import favoriteIcon from '../assets/bottom-navbar/favorite.png'
-import cartIcon from '../assets/bottom-navbar/cart.png'
-import profileIcon from '../assets/bottom-navbar/profile.png'
+import homeIcon from '../../assets/bottom-navbar/home.png'
+import searchIcon from '../../assets/bottom-navbar/search.png'
+import favoriteIcon from '../../assets/bottom-navbar/favorite.png'
+import cartIcon from '../../assets/bottom-navbar/cart.png'
+import profileIcon from '../../assets/bottom-navbar/profile.png'
 
 const navItems = [
   { icon: homeIcon, label: 'Home', path: '/home' },

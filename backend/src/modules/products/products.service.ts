@@ -13,8 +13,19 @@ export class ProductsService {
     });
   }
 
-  findAll() {
-    return this.prisma.product.findMany({ include: { category: true } });
+  async findAll(page = 1, limit = 20) {
+    const skip = (page - 1) * limit;
+
+    const [products, total] = await Promise.all([
+      this.prisma.product.findMany({
+        skip,
+        take: limit,
+        include: { category: true },
+      }),
+      this.prisma.product.count(),
+    ]);
+
+    return { products, total, page, limit, totalPages: Math.ceil(total / limit) };
   }
 
   async findOne(id: number) {

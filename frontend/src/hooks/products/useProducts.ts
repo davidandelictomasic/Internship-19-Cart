@@ -27,7 +27,7 @@ export function useProducts() {
       try {
         const res = await fetch('http://localhost:3000/products')
         const json = await res.json()
-        setProducts(json.data)
+        setProducts(json.data?.products || json.data || [])
       } catch (err: any) {
         setError(err.message)
       } finally {

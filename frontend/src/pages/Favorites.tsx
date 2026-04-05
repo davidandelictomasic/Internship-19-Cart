@@ -1,6 +1,6 @@
-import Navbar from '../components/Navbar'
-import BottomNav from '../components/BottomNav'
-import ProductPreview from '../components/ProductPreview'
+import Navbar from '../components/layout/Navbar'
+import BottomNav from '../components/layout/BottomNav'
+import ProductPreview from '../components/product/ProductPreview'
 import { useFavorites } from '../hooks/products/useFavorites'
 
 function Favorites() {

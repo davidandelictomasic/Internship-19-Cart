@@ -11,9 +11,9 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import DeliveryInfo from './pages/DeliveryInfo'
 import AdminDashboard from './pages/admin/AdminDashboard'
-import PrivateRoute from './components/PrivateRoute'
-import CartRoute from './components/CartRoute'
-import AdminRoute from './components/AdminRoute'
+import PrivateRoute from './components/security/PrivateRoute'
+import CartRoute from './components/security/CartRoute'
+import AdminRoute from './components/security/AdminRoute'
 
 function App() {
   return (

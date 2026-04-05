@@ -1,5 +1,5 @@
-import bankCard from '../assets/payment/bank-card.png'
-import moneyEuro from '../assets/payment/money-euro-box.png'
+import bankCard from '../../assets/payment/bank-card.png'
+import moneyEuro from '../../assets/payment/money-euro-box.png'
 
 type Props = {
   selected: string

@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom'
-import zutePatike from "../assets/products/onitsukaTigerMexico.png"
-import crniSweater from "../assets/products/zaraSweathshirt.png"
-import sivaHoodica from "../assets/products/pullbearHoodie.png"
-import crnaKosulja from "../assets/products/bershkaBlueShirt.png"
-import spidermanMajica from "../assets/products/bershkaSpiderLongSleeve.png"
-import sivaTuta from "../assets/products/pumaSivaTuta.png"
-import plavePatike from "../assets/products/nikeTenisicePlave.png"
+import zutePatike from "../../assets/products/onitsukaTigerMexico.png"
+import crniSweater from "../../assets/products/zaraSweathshirt.png"
+import sivaHoodica from "../../assets/products/pullbearHoodie.png"
+import crnaKosulja from "../../assets/products/bershkaBlueShirt.png"
+import spidermanMajica from "../../assets/products/bershkaSpiderLongSleeve.png"
+import sivaTuta from "../../assets/products/pumaSivaTuta.png"
+import plavePatike from "../../assets/products/nikeTenisicePlave.png"
 
 function ProductGrid() {
   const navigate = useNavigate()

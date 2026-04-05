@@ -1,5 +1,5 @@
-import Navbar from '../components/Navbar'
-import BottomNav from '../components/BottomNav'
+import Navbar from '../components/layout/Navbar'
+import BottomNav from '../components/layout/BottomNav'
 import userIcon from '../assets/profile/user.png'
 import visaIcon from '../assets/profile/visa.png'
 import { useUser } from '../hooks/user/useUser'

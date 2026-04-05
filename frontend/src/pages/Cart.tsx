@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import BottomNav from '../components/BottomNav'
-import CartItemComponent from '../components/CartItem'
-import DeliveryDateInfo from '../components/DeliveryDateInfo'
+import BottomNav from '../components/layout/BottomNav'
+import CartItemComponent from '../components/order/CartItem'
+import DeliveryDateInfo from '../components/order/DeliveryDateInfo'
 import { useCart } from '../hooks/products/useCart'
 
 function Cart() {

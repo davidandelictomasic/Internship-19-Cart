@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import BottomNav from '../components/BottomNav'
-import PaymentMethod from '../components/PaymentMethod'
-import CartItemComponent from '../components/CartItem'
-import DeliveryDateInfo from '../components/DeliveryDateInfo'
+import Navbar from '../components/layout/Navbar'
+import BottomNav from '../components/layout/BottomNav'
+import PaymentMethod from '../components/order/PaymentMethod'
+import CartItemComponent from '../components/order/CartItem'
+import DeliveryDateInfo from '../components/order/DeliveryDateInfo'
 import { useCart } from '../hooks/products/useCart'
 import { useOrders } from '../hooks/orders/useOrders'
-import OrderSuccess from '../components/OrderSuccess'
-import OrderError from '../components/OrderError'
+import OrderSuccess from '../components/order/OrderSuccess'
+import OrderError from '../components/order/OrderError'
 
 function Checkout() {
   const navigate = useNavigate()

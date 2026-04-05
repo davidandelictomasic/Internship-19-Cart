@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import BottomNav from '../components/BottomNav'
+import BottomNav from '../components/layout/BottomNav'
 import { useUser } from '../hooks/user/useUser'
 import { useUpdateUser } from '../hooks/user/useUpdateUser'
 import truckIcon from '../assets/delivery/truck.png'

@@ -21,7 +21,7 @@ function Search() {
   const hasInteracted = searchQuery.length > 0 || selectedCategory !== ''
 
   const filtered = products.filter(p => {
-    const matchesCategory = selectedCategory === '' || selectedCategory === 'Sve' || p.category.name === selectedCategory
+    const matchesCategory = selectedCategory === '' || selectedCategory === 'Sve' || p.category?.name === selectedCategory
     const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase())
     return matchesCategory && matchesSearch
   })

@@ -16,22 +16,52 @@ async function main() {
 
   const hashedPassword = await bcrypt.hash("Test1234!", 10);
 
-  await prisma.user.create({
+  const admin = await prisma.user.create({
     data: {
       email: "admin@cart.com",
       password: hashedPassword,
       name: "Admin",
-      address: "Admin HQ, Zagreb",
+      address: "Ilica 1, Zagreb",
       role: "ADMIN",
     },
   });
 
-  await prisma.user.create({
+  const marko = await prisma.user.create({
     data: {
-      email: "user@cart.com",
+      email: "marko@cart.com",
       password: hashedPassword,
-      name: "Test User",
+      name: "Marko Horvat",
       address: "Ul. Ruđera Boškovića 32, Split",
+      role: "USER",
+    },
+  });
+
+  const ana = await prisma.user.create({
+    data: {
+      email: "ana@cart.com",
+      password: hashedPassword,
+      name: "Ana Kovačević",
+      address: "Vukovarska 58, Osijek",
+      role: "USER",
+    },
+  });
+
+  const ivan = await prisma.user.create({
+    data: {
+      email: "ivan@cart.com",
+      password: hashedPassword,
+      name: "Ivan Jurić",
+      address: "Korzo 12, Rijeka",
+      role: "USER",
+    },
+  });
+
+  const petra = await prisma.user.create({
+    data: {
+      email: "petra@cart.com",
+      password: hashedPassword,
+      name: "Petra Babić",
+      address: "Gundulićeva 7, Dubrovnik",
       role: "USER",
     },
   });
@@ -206,11 +236,98 @@ async function main() {
     },
   ];
 
+  const createdProducts: any[] = [];
   for (const product of products) {
-    await prisma.product.create({ data: product });
+    const p = await prisma.product.create({ data: product });
+    createdProducts.push(p);
   }
 
-  console.log("Seed completed: 2 users, 4 categories, 18 products");
+  await prisma.order.create({
+    data: {
+      userId: marko.id, deliveryAddress: marko.address!, totalPrice: 169.80, status: "DELIVERED",
+      items: { create: [
+        { productId: createdProducts[0].id, quantity: 1, price: 89.90 },
+        { productId: createdProducts[2].id, quantity: 1, price: 79.90 },
+      ]},
+    },
+  });
+
+  await prisma.order.create({
+    data: {
+      userId: marko.id, deliveryAddress: marko.address!, totalPrice: 29.90, status: "SHIPPED",
+      items: { create: [
+        { productId: createdProducts[3].id, quantity: 1, price: 29.90 },
+      ]},
+    },
+  });
+
+  await prisma.order.create({
+    data: {
+      userId: ana.id, deliveryAddress: ana.address!, totalPrice: 319.80, status: "DELIVERED",
+      items: { create: [
+        { productId: createdProducts[4].id, quantity: 1, price: 299.90 },
+        { productId: createdProducts[6].id, quantity: 2, price: 9.90 },
+      ]},
+    },
+  });
+
+  await prisma.order.create({
+    data: {
+      userId: ana.id, deliveryAddress: ana.address!, totalPrice: 49.90, status: "PENDING",
+      items: { create: [
+        { productId: createdProducts[2].id, quantity: 1, price: 49.90 },
+      ]},
+    },
+  });
+
+  await prisma.order.create({
+    data: {
+      userId: ivan.id, deliveryAddress: ivan.address!, totalPrice: 139.80, status: "CONFIRMED",
+      items: { create: [
+        { productId: createdProducts[1].id, quantity: 1, price: 79.90 },
+        { productId: createdProducts[5].id, quantity: 3, price: 19.90 },
+      ]},
+    },
+  });
+
+  await prisma.order.create({
+    data: {
+      userId: ivan.id, deliveryAddress: ivan.address!, totalPrice: 104.95, status: "DELIVERED",
+      items: { create: [
+        { productId: createdProducts[15].id, quantity: 1, price: 104.95 },
+      ]},
+    },
+  });
+
+  await prisma.order.create({
+    data: {
+      userId: petra.id, deliveryAddress: petra.address!, totalPrice: 59.80, status: "SHIPPED",
+      items: { create: [
+        { productId: createdProducts[7].id, quantity: 1, price: 19.90 },
+        { productId: createdProducts[11].id, quantity: 2, price: 19.90 },
+      ]},
+    },
+  });
+
+  await prisma.order.create({
+    data: {
+      userId: petra.id, deliveryAddress: petra.address!, totalPrice: 89.90, status: "PENDING",
+      items: { create: [
+        { productId: createdProducts[0].id, quantity: 1, price: 89.90 },
+      ]},
+    },
+  });
+
+  await prisma.order.create({
+    data: {
+      userId: admin.id, deliveryAddress: admin.address!, totalPrice: 59.90, status: "DELIVERED",
+      items: { create: [
+        { productId: createdProducts[16].id, quantity: 1, price: 59.90 },
+      ]},
+    },
+  });
+
+  console.log("Seed completed: 5 users, 4 categories, 18 products, 9 orders");
 }
 
 main()

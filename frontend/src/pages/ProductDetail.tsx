@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import BottomNav from '../components/BottomNav'
 import { useProduct } from '../hooks/useProduct'
 import { useFavorites } from '../hooks/useFavorites'
+import { useCart } from '../hooks/useCart'
 import heartIcon from '../assets/heart.png'
 import heartOutlined from '../assets/heartOutlined.png'
 
@@ -12,10 +13,27 @@ function ProductDetail() {
   const navigate = useNavigate()
   const { product, loading, error } = useProduct(Number(id))
   const [selectedColor, setSelectedColor] = useState(0)
+  const [selectedSize, setSelectedSize] = useState('')
   const { isFavorite, toggleFavorite } = useFavorites()
+  const { addItem } = useCart()
 
   if (loading) return <div className="min-h-screen bg-white"><Navbar /><p className="text-center mt-8 text-gray-400">Loading...</p></div>
   if (error || !product) return <div className="min-h-screen bg-white"><Navbar /><p className="text-center mt-8 text-red-400">Product not found</p></div>
+
+  const handleAddToCart = () => {
+    if (!selectedSize) return
+    addItem({
+      productId: product.id,
+      name: product.name,
+      brand: product.brand,
+      category: product.category.name,
+      price: product.price,
+      posterUrl: product.posterUrls[selectedColor] || product.posterUrls[0],
+      selectedSize,
+      selectedColor: product.colors[selectedColor] || '',
+    })
+    navigate('/cart')
+  }
 
   return (
     <div className="pb-16 bg-white min-h-screen">
@@ -50,14 +68,25 @@ function ProductDetail() {
 
         <div className="grid grid-cols-2 gap-3 mt-3">
           {product.sizes.map(size => (
-            <button key={size} className="border border-gray-300 rounded-full py-3 text-sm text-center">
+            <button
+              key={size}
+              onClick={() => setSelectedSize(size)}
+              className={`rounded-full py-3 text-sm text-center border ${
+                selectedSize === size ? 'border-black bg-black text-white' : 'border-gray-300'
+              }`}
+            >
               {size}
             </button>
           ))}
         </div>
 
         <div className="flex gap-3 mt-5 items-center">
-          <button className="flex-1 bg-[#6B4226] text-white rounded-full py-3 text-sm font-semibold uppercase">
+          <button
+            onClick={handleAddToCart}
+            className={`flex-1 rounded-full py-3 text-sm font-semibold uppercase ${
+              selectedSize ? 'bg-[#6B4226] text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
+          >
             Dodaj u košaricu
           </button>
           <button

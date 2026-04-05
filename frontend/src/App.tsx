@@ -7,6 +7,7 @@ import Profile from './pages/Profile'
 import Search from './pages/Search'
 import ProductDetail from './pages/ProductDetail'
 import Favorites from './pages/Favorites'
+import Cart from './pages/Cart'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/search" element={<Search />} />
       <Route path="/product/:id" element={<ProductDetail />} />
       <Route path="/favorites" element={<Favorites />} />
+      <Route path="/cart" element={<Cart />} />
     </Routes>
   )
 }

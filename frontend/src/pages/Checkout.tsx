@@ -7,12 +7,15 @@ import CartItemComponent from '../components/CartItem'
 import DeliveryDateInfo from '../components/DeliveryDateInfo'
 import { useCart } from '../hooks/useCart'
 import { useOrders } from '../hooks/useOrders'
+import OrderSuccess from '../components/OrderSuccess'
+import OrderError from '../components/OrderError'
 
 function Checkout() {
   const navigate = useNavigate()
   const { items, totalPrice, clearCart, removeItem } = useCart()
   const { createOrder, loading: submitting } = useOrders()
   const [paymentMethod, setPaymentMethod] = useState('')
+  const [orderStatus, setOrderStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const deliveryAddress = localStorage.getItem('deliveryAddress') || ''
 
@@ -30,8 +33,18 @@ function Checkout() {
       clearCart()
       localStorage.removeItem('deliveryAddress')
       localStorage.removeItem('billingAddress')
-      navigate('/home')
+      setOrderStatus('success')
+    } else {
+      setOrderStatus('error')
     }
+  }
+
+  if (orderStatus === 'success') {
+    return <OrderSuccess onClose={() => navigate('/home')} />
+  }
+
+  if (orderStatus === 'error') {
+    return <OrderError onClose={() => setOrderStatus('idle')} />
   }
 
   if (items.length === 0) {

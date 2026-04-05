@@ -24,7 +24,7 @@ function BottomNav() {
           key={item.path}
           onClick={() => navigate(item.path)}
           className={`flex flex-col items-center gap-1 ${
-            location.pathname === item.path ? 'opacity-100' : 'opacity-40'
+            location.pathname === item.path ? 'opacity-100 scale-110' : 'opacity-30'
           }`}
         >
           <img src={item.icon} alt={item.label} className="w-6 h-6" />

@@ -10,6 +10,8 @@ import Favorites from './pages/Favorites'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import DeliveryInfo from './pages/DeliveryInfo'
+import PrivateRoute from './components/PrivateRoute'
+import CartRoute from './components/CartRoute'
 
 function App() {
   return (
@@ -18,13 +20,13 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/profile" element={<Profile />} />
       <Route path="/search" element={<Search />} />
       <Route path="/product/:id" element={<ProductDetail />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/checkout" element={<Checkout />} />
-      <Route path="/delivery" element={<DeliveryInfo />} />
+      <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+      <Route path="/favorites" element={<PrivateRoute><Favorites /></PrivateRoute>} />
+      <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
+      <Route path="/delivery" element={<CartRoute><DeliveryInfo /></CartRoute>} />
+      <Route path="/checkout" element={<CartRoute><Checkout /></CartRoute>} />
     </Routes>
   )
 }

@@ -57,6 +57,12 @@ npm run dev
 | ivan@cart.com | Test1234! | USER |
 | petra@cart.com | Test1234! | USER |
 
+## Deployment
+
+The project uses a CI/CD pipeline with GitHub Actions to automatically build and push Docker images to GitHub Container Registry (ghcr.io) on every push to `main`.
+
+The backend is deployed on an AWS EC2 instance.
+
 ## API Docs
 
 Swagger available at `http://localhost:3000/api`

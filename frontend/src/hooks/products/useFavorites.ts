@@ -22,7 +22,7 @@ export function useFavorites() {
 
     const fetchFavorites = async () => {
       try {
-        const res = await fetch('http://localhost:3000/favorites', {
+        const res = await fetch('http://18.198.55.139:3000/favorites', {
           headers: { Authorization: `Bearer ${token}` },
         })
         const json = await res.json()
@@ -41,7 +41,7 @@ export function useFavorites() {
   const addFavorite = async (productId: number) => {
     const token = localStorage.getItem('token')
     try {
-      const res = await fetch(`http://localhost:3000/favorites/${productId}`, {
+      const res = await fetch(`http://18.198.55.139:3000/favorites/${productId}`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -58,7 +58,7 @@ export function useFavorites() {
   const removeFavorite = async (productId: number) => {
     const token = localStorage.getItem('token')
     try {
-      const res = await fetch(`http://localhost:3000/favorites/${productId}`, {
+      const res = await fetch(`http://18.198.55.139:3000/favorites/${productId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       })

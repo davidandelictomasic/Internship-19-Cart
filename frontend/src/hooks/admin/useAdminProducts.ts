@@ -22,7 +22,7 @@ export function useAdminProducts() {
   const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
 
   const fetchProducts = async () => {
-    const res = await fetch('http://localhost:3000/products')
+    const res = await fetch('http://18.198.55.139:3000/products')
     const json = await res.json()
     setProducts(json.data.products)
     setLoading(false)
@@ -31,17 +31,17 @@ export function useAdminProducts() {
   useEffect(() => { fetchProducts() }, [])
 
   const createProduct = async (data: any) => {
-    await fetch('http://localhost:3000/products', { method: 'POST', headers, body: JSON.stringify(data) })
+    await fetch('http://18.198.55.139:3000/products', { method: 'POST', headers, body: JSON.stringify(data) })
     fetchProducts()
   }
 
   const updateProduct = async (id: number, data: any) => {
-    await fetch(`http://localhost:3000/products/${id}`, { method: 'PUT', headers, body: JSON.stringify(data) })
+    await fetch(`http://18.198.55.139:3000/products/${id}`, { method: 'PUT', headers, body: JSON.stringify(data) })
     fetchProducts()
   }
 
   const deleteProduct = async (id: number) => {
-    await fetch(`http://localhost:3000/products/${id}`, { method: 'DELETE', headers })
+    await fetch(`http://18.198.55.139:3000/products/${id}`, { method: 'DELETE', headers })
     fetchProducts()
   }
 

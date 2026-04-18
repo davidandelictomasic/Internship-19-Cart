@@ -12,7 +12,7 @@ export function useCategories() {
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch('http://localhost:3000/categories')
+      const res = await fetch('http://18.198.55.139:3000/categories')
       const json = await res.json()
       setCategories(json.data)
     } catch {

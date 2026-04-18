@@ -25,7 +25,7 @@ export function useProducts() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('http://localhost:3000/products')
+        const res = await fetch('http://18.198.55.139:3000/products')
         const json = await res.json()
         setProducts(json.data?.products || json.data || [])
       } catch (err: any) {

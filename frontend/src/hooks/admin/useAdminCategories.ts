@@ -14,7 +14,7 @@ export function useAdminCategories() {
   const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
 
   const fetchCategories = async () => {
-    const res = await fetch('http://localhost:3000/categories')
+    const res = await fetch('http://18.198.55.139:3000/categories')
     const json = await res.json()
     setCategories(json.data)
     setLoading(false)
@@ -23,12 +23,12 @@ export function useAdminCategories() {
   useEffect(() => { fetchCategories() }, [])
 
   const createCategory = async (name: string) => {
-    await fetch('http://localhost:3000/categories', { method: 'POST', headers, body: JSON.stringify({ name }) })
+    await fetch('http://18.198.55.139:3000/categories', { method: 'POST', headers, body: JSON.stringify({ name }) })
     fetchCategories()
   }
 
   const deleteCategory = async (id: number) => {
-    await fetch(`http://localhost:3000/categories/${id}`, { method: 'DELETE', headers })
+    await fetch(`http://18.198.55.139:3000/categories/${id}`, { method: 'DELETE', headers })
     fetchCategories()
   }
 

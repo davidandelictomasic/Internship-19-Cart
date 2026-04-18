@@ -22,7 +22,7 @@ export function useUser() {
 
     const fetchUser = async () => {
       try {
-        const res = await fetch('http://localhost:3000/users/me', {
+        const res = await fetch('http://18.198.55.139:3000/users/me', {
           headers: { Authorization: `Bearer ${token}` },
         })
         const json = await res.json()

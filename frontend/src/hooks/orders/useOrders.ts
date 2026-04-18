@@ -20,7 +20,7 @@ export function useOrders() {
     setError(null)
     const token = localStorage.getItem('token')
     try {
-      const res = await fetch('http://localhost:3000/orders', {
+      const res = await fetch('http://18.198.55.139:3000/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

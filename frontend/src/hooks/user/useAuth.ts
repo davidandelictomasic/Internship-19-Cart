@@ -15,7 +15,7 @@ export function useAuth() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('http://localhost:3000/auth/register', {
+      const res = await fetch('http://18.198.55.139:3000/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -36,7 +36,7 @@ export function useAuth() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('http://localhost:3000/auth/login', {
+      const res = await fetch('http://18.198.55.139:3000/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
